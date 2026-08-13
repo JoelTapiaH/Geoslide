@@ -11,8 +11,33 @@
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
+<!--
+  ============================================================
+  GEOBUILDING · Proyectos
+  ============================================================
+  Sitio estático: HTML + CSS + JS, sin frameworks ni build.
+
+  CONCEPTO "EL CORTE"
+  La página se lee como una sección vertical del terreno: arriba
+  la superficie (0.00 m), abajo el subsuelo. Los separadores de
+  sección son contactos estratigráficos y llevan su cota.
+
+  DÓNDE TOCAR QUÉ
+  · Textos ............ directamente aquí, en este archivo.
+  · Estilos ........... css/site.css (está dividido en 20 bloques
+                        numerados; busca el número de bloque).
+  · Comportamiento .... js/site.js
+  · Datos de obra ..... js/site.js, constante OBRAS, y las fichas
+                        escritas a mano en proyectos.html.
+
+  CABECERA Y PIE se repiten en las 9 páginas. Si cambias el menú
+  o los teléfonos, hay que replicarlo en todas.
+  ============================================================
+-->
 <a class="salta" href="#principal">Saltar al contenido</a>
 
+<!-- Rail de cota: la profundidad de lectura avanza con el scroll
+     (js/site.js, funcion rail). Solo visible desde 1180px. -->
 <aside class="rail" aria-hidden="true">
   <div class="rail__ticks"></div>
   <span class="rail__cero">0.00</span>
@@ -21,6 +46,8 @@
   <span class="rail__fondo">Cota de lectura</span>
 </aside>
 
+<!-- CABECERA compartida por las 9 paginas. El menu movil lo abre
+     js/site.js (funcion menu). aria-current marca la pagina activa. -->
 <header class="cabecera">
   <div class="cabecera__in">
     <a class="marca" href="index.html">
@@ -69,6 +96,8 @@
   </section>
   <section class="profundo seccion" style="margin-top:0">
     <div class="env">
+      <!-- Contacto estratigrafico: separador de seccion con su cota.
+           data-estrato (1-5) elige el color del rayado. -->
       <div class="contacto" data-estrato="4">
         <span class="contacto__t" style="color:#fff">Perfil de excavaciones</span>
         <span class="contacto__d" style="color:#8C99AD">Todas las obras · escala real</span>
@@ -90,6 +119,8 @@
 
   <section class="seccion">
     <div class="env">
+      <!-- Contacto estratigrafico: separador de seccion con su cota.
+           data-estrato (1-5) elige el color del rayado. -->
       <div class="contacto" data-estrato="2">
         <span class="contacto__t">Fichas técnicas</span>
         <span class="contacto__d">16 obras · Lima Metropolitana</span>
@@ -515,6 +546,8 @@
 
 </main>
 
+<!-- PIE compartido. Los enlaces de Facebook e Instagram siguen
+     apuntando a "#": faltan las URLs reales. -->
 <footer class="pie">
   <div class="env">
     <div class="pie__grid">
@@ -555,6 +588,7 @@
   </div>
 </footer>
 
+<!-- Boton flotante de WhatsApp -->
 <a class="wa" href="https://wa.me/51989251112" aria-label="Escríbenos por WhatsApp">
   <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-6.9 12L0 16l4.2-1.1A8 8 0 1 0 8 0Zm4.6 11.3c-.2.5-1.1 1-1.5 1-.4.1-.9.1-1.5-.1-.3-.1-.8-.3-1.4-.6-2.4-1.1-4-3.6-4.1-3.8-.1-.2-1-1.3-1-2.5s.6-1.8.8-2c.2-.3.5-.3.6-.3h.5c.1 0 .3-.1.6.4l.7 1.7c.1.1.1.3 0 .4l-.3.4-.3.3c-.1.1-.2.2-.1.4.1.2.5.9 1.1 1.4.8.7 1.4.9 1.6 1 .2.1.3.1.4-.1l.6-.7c.1-.2.3-.1.5-.1l1.5.7c.2.1.4.2.4.3.1.1.1.5 0 1Z"/></svg>
 </a>
