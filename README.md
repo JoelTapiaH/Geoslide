@@ -12,7 +12,9 @@ superficie (0.00 m) hacia abajo:
   avanza con el scroll.
 - **Separadores de sección** dibujados como contactos estratigráficos, con su estrato
   y su cota (`Estrato 02 · −8.40 m`).
-- **Portada**: el corte tipo de un muro anclado, dibujado en SVG y animado al cargar
+- **Hero**: video de obra real (la excavación con el equipo de perforación) cerrado
+  abajo por la línea de datum `N.P.T. ±0.00`. Todo lo que sigue está bajo tierra.
+- **Corte tipo**: el corte de un muro anclado, dibujado en SVG y animado al cargar
   (tramo libre, bulbo, nivel freático, cadena de cotas y N.F.C.). No es una imagen,
   es código: se puede editar cualquier valor.
 - **Zona profunda** (fondo oscuro): el perfil real de las 16 obras a escala.
@@ -44,6 +46,29 @@ Si cambia un dato hay que tocar los dos sitios.
 
 Totales usados en la portada: **25,255 ml** perforados, obra más profunda **−31.40 m**
 (Camino Real, nueve sótanos), **FS 1.50** estático mínimo.
+
+## Video del hero
+
+`assets/video/obra-hero.mp4` — 960×540, H.264, 4.4 s, 4 MB. Sale de `IMG_7105.MOV`
+(1920×1080, HEVC, 12.8 MB), que se convirtió porque **Chrome y Firefox no reproducen
+HEVC**; solo Safari lo hace.
+
+Carga condicional (`heroVideo()` en `js/site.js`): el video solo se descarga en
+pantallas de 760 px o más y con movimiento permitido. En móvil, o con
+`prefers-reduced-motion`, se queda el póster `obra-hero.jpg` (316 KB) que ya viene
+en el HTML. Así el móvil nunca baja los 4 MB.
+
+Para cambiar el video: reemplazar ambos archivos manteniendo los nombres. El
+original de cámara está excluido del repo por peso (ver `.gitignore`).
+
+Comandos usados, por si hay que repetirlo (solo herramientas de macOS):
+
+```
+avconvert -s IMG_7105.MOV -o assets/video/obra-hero.mp4 \
+          -p Preset960x540 --start 1.2 --duration 4.4 --replace --multiPass
+qlmanage -t -s 1600 -o . assets/video/obra-hero.mp4
+sips -s format jpeg -s formatOptions 55 -Z 1500 obra-hero.mp4.png --out obra-hero.jpg
+```
 
 ## Imágenes pendientes
 

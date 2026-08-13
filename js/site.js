@@ -98,6 +98,40 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- 3b. Video del hero ----------
+     Solo se descarga en pantallas grandes y con movimiento permitido.
+     En móvil o con reduced-motion queda el póster, que ya está en el HTML. */
+  function heroVideo() {
+    var media = $("[data-hero-video]");
+    if (!media) return;
+    if (reducido || window.innerWidth < 760) return;
+
+    var v = document.createElement("video");
+    v.src = media.getAttribute("data-hero-video");
+    v.poster = media.getAttribute("data-hero-poster");
+    v.autoplay = true;
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("aria-hidden", "true");
+    v.preload = "auto";
+    v.style.opacity = "0";
+    v.style.transition = "opacity .8s ease";
+
+    v.addEventListener("playing", function () {
+      v.style.opacity = "1";
+      var img = media.querySelector("img");
+      if (img) img.style.visibility = "hidden";
+    });
+    v.addEventListener("error", function () { v.remove(); });
+
+    media.appendChild(v);
+    var p = v.play();
+    if (p && p.catch) p.catch(function () { v.remove(); });
+  }
+
   /* ---------- 4. Corte de portada ---------- */
   function corte() {
     var svg = $("[data-corte]");
@@ -248,7 +282,7 @@
 
   /* ---------- Arranque ---------- */
   function init() {
-    menu(); rail(); revelar(); corte(); perfil(); formularios();
+    menu(); rail(); revelar(); heroVideo(); corte(); perfil(); formularios();
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
